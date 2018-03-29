@@ -28,7 +28,7 @@ class MFFeatureExctractor:
         fbank = [] 
         for i in range(0, len(y) - frame_size, frame_step):
             frame_y = y[i: i + frame_step]
-            fbank.append(np.mean(librosa.feature.melspectrogram(y=frame_y, sr=sr), axis=1))
+            fbank.append(np.mean(np.log(librosa.feature.melspectrogram(y=frame_y, sr=sr)), axis=1))
         fbank = np.vstack(fbank)
         features.append(pd.DataFrame(fbank, 
                                      index=list(range(fbank.shape[0])), 
